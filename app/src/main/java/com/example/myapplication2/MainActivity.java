@@ -64,7 +64,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.Read:
                 Cursor cursor = database.query(DBHelper.TABLE_CONTACTS, null, null, null, null, null, null);
-
+                tvText.setText("");
+                str= null;
                 if (cursor.moveToFirst()) {
                     int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
                     int nameIndex = cursor.getColumnIndex(DBHelper.KEY_NAME);
@@ -95,7 +96,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.Clear:
                 database.delete(DBHelper.TABLE_CONTACTS, null, null);
+                tvText.setText("");
+                str= null;
                 break;
+
         }
         dbHelper.close();
     }

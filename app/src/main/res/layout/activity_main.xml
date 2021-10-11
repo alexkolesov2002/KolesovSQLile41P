@@ -23,13 +23,14 @@
         android:id="@+id/Mail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
         android:hint="Mail"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Name"
-        android:layout_marginBottom="50dp"
         app:layout_constraintVertical_bias="0.052" />
 
     <TableLayout
@@ -45,7 +46,8 @@
         <TableRow
             android:id="@+id/row1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@android:dimen/app_icon_size">
 
             <Button
                 android:id="@+id/Add"
@@ -54,12 +56,6 @@
                 android:text="Add"
                 android:layout_margin="20dp"/>
 
-            <Button
-                android:id="@+id/Read"
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-                android:text="Read"
-                android:layout_margin="20dp"/>
 
             <Button
                 android:id="@+id/Clear"
@@ -72,15 +68,15 @@
 
     </TableLayout>
 
-    <TextView
-        android:id="@+id/output"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TableLayout
+        android:id="@+id/tableLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-        app:layout_constraintVertical_bias="0.12">
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout">
 
-    </TextView>
+</TableLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

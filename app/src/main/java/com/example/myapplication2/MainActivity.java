@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         cursor.close();
     }
+
     @Override
     public void onClick(View v) {
         dbHelper = new DBHelper(this);
@@ -109,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 database.insert(DBHelper.TABLE_CONTACTS, null, contentValues);
                 UpdateTable();
+                etEmail.setText("");
+                etName.setText("");
                 break;
 
             case R.id.Clear:

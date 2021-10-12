@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -111,24 +112,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String model = etModel.getText().toString();
         String voltage = etVoltage.getText().toString();
         contentValues = new ContentValues();
-      //  Toast toast = Toast.makeText(this, "Hello Android!",Toast.LENGTH_LONG);
+
         switch (v.getId()) {
 
             case R.id.Add:
-//                if ((etModel.getText()== null) || (etName.getText()== null)  || (etVoltage.getText()== null))
-//            {
-//
-//                toast.show();
-//            }
-                contentValues.put(DBHelper.KEY_NAME, name);
-                contentValues.put(DBHelper.KEY_MODEL, model);
-                contentValues.put(DBHelper.KEY_VOLTAGE, voltage);
 
-                database.insert(DBHelper.TABLE_MOTORS, null, contentValues);
-                UpdateTable();
-                etModel.setText(null);
-                etName.setText(null);
-                etVoltage.setText(null);
+
+                    contentValues.put(DBHelper.KEY_NAME, name);
+                    contentValues.put(DBHelper.KEY_MODEL, model);
+                    contentValues.put(DBHelper.KEY_VOLTAGE, voltage);
+
+                    database.insert(DBHelper.TABLE_MOTORS, null, contentValues);
+                    UpdateTable();
+                    etModel.setText(null);
+                    etName.setText(null);
+                    etVoltage.setText(null);
+
                 break;
 
             case R.id.Clear:

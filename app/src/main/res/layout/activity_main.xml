@@ -11,7 +11,7 @@
         android:id="@+id/Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
+        android:hint="Имя сотрудника"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:hint="Model"
+        android:hint="Модель узла"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +37,7 @@
         android:id="@+id/Voltage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Voltage"
+        android:hint="Напряжение"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -76,11 +76,14 @@
                 android:layout_margin="20dp"
                 android:text="Clear" />
 
+
+
+
         </TableRow>
 
     </TableLayout>
-
     <TableLayout
+
         android:id="@+id/tableLayout2"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -89,6 +92,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout">
 
-</TableLayout>
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

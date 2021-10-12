@@ -20,11 +20,11 @@
         />
 
     <EditText
-        android:id="@+id/Mail"
+        android:id="@+id/Model"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:hint="Mail"
+        android:hint="Model"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,6 +33,18 @@
         app:layout_constraintTop_toBottomOf="@id/Name"
         app:layout_constraintVertical_bias="0.052" />
 
+    <EditText
+        android:id="@+id/Voltage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Voltage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Model"
+        app:layout_constraintVertical_bias="0.072" />
+
     <TableLayout
         android:id="@+id/tableLayout"
         android:layout_width="413dp"
@@ -40,13 +52,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Mail"
+        app:layout_constraintTop_toBottomOf="@+id/Voltage"
         app:layout_constraintVertical_bias="0">
 
         <TableRow
             android:id="@+id/row1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="73dp"
             android:paddingHorizontal="@android:dimen/app_icon_size">
 
 

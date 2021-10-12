@@ -19,7 +19,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btnAdd, btnRead, btnClear;
-    EditText etName, etEmail;
+    EditText etName, etModel, etVoltage;
     DBHelper dbHelper;
     ContentValues contentValues;
     SQLiteDatabase database;
@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnClear.setOnClickListener(this);
 
         etName = (EditText) findViewById(R.id.Name);
-        etEmail = (EditText) findViewById(R.id.Mail);
+        etModel = (EditText) findViewById(R.id.Model);
+        etVoltage = (EditText) findViewById(R.id.Voltage);
 
 
         dbHelper = new DBHelper(this);
@@ -45,11 +46,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         UpdateTable();
     }
     public void UpdateTable() {
-        Cursor cursor = database.query(DBHelper.TABLE_CONTACTS, null, null, null, null, null, null);
+        Cursor cursor = database.query(DBHelper.TABLE_MOTORS, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
             int nameIndex = cursor.getColumnIndex(DBHelper.KEY_NAME);
-            int mailIndex = cursor.getColumnIndex(DBHelper.KEY_MAIL);
+            int modelIndex = cursor.getColumnIndex(DBHelper.KEY_MODEL);
+            int voltageIndex = cursor.getColumnIndex(DBHelper.KEY_VOLTAGE);
             TableLayout tb2 = findViewById(R.id.tableLayout2);
             tb2.removeAllViews();
             do {
@@ -72,11 +74,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tbOUT.addView(NAME);
 
 
-                TextView MAIL = new TextView(this);
+                TextView MODEL = new TextView(this);
                 params.weight = 3.0f;
-                MAIL.setLayoutParams(params);
-                MAIL.setText(cursor.getString(mailIndex));
-                tbOUT.addView(MAIL);
+                MODEL.setLayoutParams(params);
+                MODEL.setText(cursor.getString(modelIndex));
+                tbOUT.addView(MODEL);
+
+                TextView VOLTAGE = new TextView(this);
+                params.weight = 3.0f;
+                VOLTAGE.setLayoutParams(params);
+                VOLTAGE.setText(cursor.getString(voltageIndex));
+                tbOUT.addView(VOLTAGE);
 
 
                 Button DEL = new Button(this);
@@ -100,22 +108,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         dbHelper = new DBHelper(this);
         String name = etName.getText().toString();
-        String email = etEmail.getText().toString();
+        String model = etModel.getText().toString();
+        String voltage = etVoltage.getText().toString();
         contentValues = new ContentValues();
+      //  Toast toast = Toast.makeText(this, "Hello Android!",Toast.LENGTH_LONG);
         switch (v.getId()) {
 
             case R.id.Add:
+//                if ((etModel.getText()== null) || (etName.getText()== null)  || (etVoltage.getText()== null))
+//            {
+//
+//                toast.show();
+//            }
                 contentValues.put(DBHelper.KEY_NAME, name);
-                contentValues.put(DBHelper.KEY_MAIL, email);
+                contentValues.put(DBHelper.KEY_MODEL, model);
+                contentValues.put(DBHelper.KEY_VOLTAGE, voltage);
 
-                database.insert(DBHelper.TABLE_CONTACTS, null, contentValues);
+                database.insert(DBHelper.TABLE_MOTORS, null, contentValues);
                 UpdateTable();
-                etEmail.setText("");
-                etName.setText("");
+                etModel.setText(null);
+                etName.setText(null);
+                etVoltage.setText(null);
                 break;
 
             case R.id.Clear:
-                database.delete(DBHelper.TABLE_CONTACTS, null, null);
+                database.delete(DBHelper.TABLE_MOTORS, null, null);
+                TableLayout dbOutput = findViewById(R.id.tableLayout2);
+                dbOutput.removeAllViews();
+                etModel.setText(null);
+                etName.setText(null);
+                etVoltage.setText(null);
                 UpdateTable();
                 break;
             default:
@@ -124,29 +146,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 outBD.removeView(outBDRow);
                 outBD.invalidate();
 
-                database.delete(DBHelper.TABLE_CONTACTS,DBHelper.KEY_ID + " = ?", new String[]{String.valueOf((v.getId()))});
+                database.delete(DBHelper.TABLE_MOTORS,DBHelper.KEY_ID + " = ?", new String[]{String.valueOf((v.getId()))});
                 contentValues = new ContentValues();
-                Cursor cursorUPD = database.query(DBHelper.TABLE_CONTACTS, null, null, null, null, null, null);
+                Cursor cursorUPD = database.query(DBHelper.TABLE_MOTORS, null, null, null, null, null, null);
 
                 if (cursorUPD.moveToFirst()) {
                     int idIndex = cursorUPD.getColumnIndex(DBHelper.KEY_ID);
                     int nameIndex = cursorUPD.getColumnIndex(DBHelper.KEY_NAME);
-                    int mailIndex = cursorUPD.getColumnIndex(DBHelper.KEY_MAIL);
+                    int modelIndex = cursorUPD.getColumnIndex(DBHelper.KEY_MODEL);
+                    int voltageIndex = cursorUPD.getColumnIndex(DBHelper.KEY_VOLTAGE);
                     int realID =1;
                     do{
                         if(cursorUPD.getInt(idIndex)>realID)
                         {
                             contentValues.put(DBHelper.KEY_ID,realID);
                             contentValues.put(DBHelper.KEY_NAME,cursorUPD.getString(nameIndex));
-                            contentValues.put(DBHelper.KEY_MAIL,cursorUPD.getString(mailIndex));
-                            database.replace(DBHelper.TABLE_CONTACTS,null,contentValues);
+                            contentValues.put(DBHelper.KEY_MODEL,cursorUPD.getString(modelIndex));
+                            contentValues.put(DBHelper.KEY_VOLTAGE,cursorUPD.getString(voltageIndex));
+                            database.replace(DBHelper.TABLE_MOTORS,null,contentValues);
 
 
                         }
                             realID++;
                     }while (cursorUPD.moveToNext());
-                    if(cursorUPD.moveToLast()){
-                        database.delete(DBHelper.TABLE_CONTACTS,DBHelper.KEY_ID+ " = ?", new String[]{cursorUPD.getString(idIndex)});
+                    if(cursorUPD.moveToLast() && v.getId()!=realID){
+                        database.delete(DBHelper.TABLE_MOTORS,DBHelper.KEY_ID+ " = ?", new String[]{cursorUPD.getString(idIndex)});
                     }
                     UpdateTable();
                 }
